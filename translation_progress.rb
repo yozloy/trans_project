@@ -17,7 +17,6 @@ get '/new' do
 <form aciton="egwgwgw" method="post">
 		<input type="text" name="name[number]" />
 		<input type="text" name="name[url]" />
-		<input type="text" name="name[status]" />
 		<input type="submit" name="give it to me" />
 	</form>
 	HERE
