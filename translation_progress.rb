@@ -4,6 +4,11 @@ get '/' do
 	@c = Riak::Client.new
 	@b = @c.bucket('trans_projects')
 	@keys = @b.keys
+	@a = @keys.map do |k|
+		@b.get(k)
+	end.sort do |x,y| 
+		x.data["number"] <=> y.data["number"]
+	end
 erb :list,:layout => :layout
 end
 

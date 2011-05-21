@@ -1,20 +1,21 @@
 <h1>Great Hand for Life Time 汉化进度</h1>
 <ul style="list-style: none; padding:0;margin:0;">
-<% @keys.each do |x|%>
+
+<% @a.each do |r|%>
+
 <li style="padding: 5px 10px;
-<% if @b.get(x).data['status'] == 'Finished!' %>
+<% if r.data['status'] == 'Finished!' %>
 background: #b7f665;
-<% elsif !@b.get(x).data['status'] %>
+<% elsif !r.data['status'] %>
 background: #cccccc;
-<% elsif @b.get(x).data['status'] == 'EN-?' || @b.get(x).data['status'] == 'CN-?'%>
+<% elsif r.data['status'] == 'EN-?' || r.data['status'] == 'CN-?'%>
 background: #f25757;
-<% elsif @b.get(x).data['status'] == 'EN-OK' %>
+<% elsif r.data['status'] == 'EN-OK' %>
 background: #65C4F7;
 <% end %>
 ">
-<a style="display:inline-block;width:24em;" href="<%= @b.get(x).data['url']%>"><span style="font-family: sans-serif; margin-right: 10px;">Great Hand-<%= @b.get(x).data['number'] %></span>current-status: <%=  @b.get(x).data['status']%></a>
-	<span>change the status:</span>
-	<form style="display:inline;" action="/update/<%= x%>" method="post">
+<a style="display:inline-block;" href="<%= r.data['url']%>"><span style="font-family: sans-serif; margin-right: 10px;">Great Hand-<%= r.data['number'] %></span></a><span style="cursor: pointer;margin-left: 3em;display:inline-block;width: 7em;" class="status"><%=  r.data['status']%></span>
+	<form style="display:inline;" action="/update/<%= r.key%>" method="post">
 		<select name="name[status]">
 			<option>EN-?</option>
 			<option>EN-OK</option>
@@ -26,4 +27,12 @@ background: #65C4F7;
 </li> 
 <% end %>
 </ul>
+<script>
+$(function(){
+		$('form').hide();
+		$('.status').click(function(){
+				$(this).next('form').toggle()
+			})
+		})
+</script>
 
