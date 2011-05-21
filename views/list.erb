@@ -14,7 +14,7 @@ background: #f25757;
 background: #65C4F7;
 <% end %>
 ">
-<a style="display:inline-block;" href="<%= r.data['url']%>"><span style="font-family: sans-serif; margin-right: 10px;">Great Hand-<%= r.data['number'] %></span></a><span style="cursor: pointer;margin-left: 3em;display:inline-block;width: 7em;" class="status"><%=  r.data['status']%></span>
+<a style="display:inline-block;" href="<%= r.data['url']%>"><span style="font-family: sans-serif; margin-right: 10px;">Great Hand-<%= r.data['number'] %></span></a><span style="cursor: pointer;margin-left: 3em;display:inline-block;width: 7em;" class="status"><%=  if r.data['status']; r.data['status']; else ' ' end %></span>
 	<form style="display:inline;" action="/update/<%= r.key%>" method="post">
 		<select name="name[status]">
 			<option>EN-?</option>

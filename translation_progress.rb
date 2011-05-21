@@ -6,7 +6,7 @@ get '/' do
 	@keys = @b.keys
 	@a = @keys.map do |k|
 		@b.get(k)
-	end.sort do |x,y| 
+	end.sort do |y,x| 
 		x.data["number"] <=> y.data["number"]
 	end
 erb :list,:layout => :layout
