@@ -9,9 +9,10 @@ end
 
 get '/new' do
 <<-HERE
-<form aciton="/egegegew" method="post">
+<form aciton="egwgwgw" method="post">
 		<input type="text" name="name[number]" />
 		<input type="text" name="name[url]" />
+		<input type="text" name="name[status]" />
 		<input type="submit" name="give it to me" />
 	</form>
 	HERE
@@ -32,5 +33,17 @@ end
 
 get '/error' do
 	"Something wrong"
+end
+
+post '/update/:key' do 
+	@c = Riak::Client.new
+	@b = @c.bucket('trans_projects')
+	@o = @b.get(params[:key])
+	@o.data[:status] = params[:name][:status]
+	if @o.store
+		redirect to('/') 
+	else
+		redirect to('/error')
+	end
 end
 

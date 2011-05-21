@@ -1,7 +1,29 @@
 <h1>Great Hand for Life Time 汉化进度</h1>
-<ul>
+<ul style="list-style: none; padding:0;margin:0;">
 <% @keys.each do |x|%>
-<li><a href="<%= @b.get(x).data['url']%>">Great Hand-<%= @b.get(x).data['number'] %></a></li> 
+<li style="padding: 5px 10px;
+<% if @b.get(x).data['status'] == 'Finished!' %>
+background: #b7f665;
+<% elsif !@b.get(x).data['status'] %>
+background: #cccccc;
+<% elsif @b.get(x).data['status'] == 'EN-?' || @b.get(x).data['status'] == 'CN-?'%>
+background: #f25757;
+<% elsif @b.get(x).data['status'] == 'EN-OK' %>
+background: #65C4F7;
+<% end %>
+">
+<a style="display:inline-block;width:24em;" href="<%= @b.get(x).data['url']%>"><span style="font-family: sans-serif; margin-right: 10px;">Great Hand-<%= @b.get(x).data['number'] %></span>current-status: <%=  @b.get(x).data['status']%></a>
+	<span>change the status:</span>
+	<form style="display:inline;" action="/update/<%= x%>" method="post">
+		<select name="name[status]">
+			<option>EN-?</option>
+			<option>EN-OK</option>
+			<option>CN-?</option>
+			<option>Finished!</option>
+		</select>
+		<input type="submit" />	
+	</form>
+</li> 
 <% end %>
 </ul>
 
