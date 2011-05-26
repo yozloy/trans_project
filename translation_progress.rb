@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'riak'
 get '/' do 
+
 	@c = Riak::Client.new
 	@b = @c.bucket('trans_projects')
 	@keys = @b.keys
@@ -51,3 +52,20 @@ post '/update/:key' do
 	end
 end
 
+post '/count/:key' do
+#	f = File.open('tmp','w+')
+#	f << params[:name][:transcript]
+#	f.close
+#	a = `wc tmp`.split(' ')
+#	File.delete('tmp')
+	a = params[:name][:transcript].split(' ')
+	@c = Riak::Client.new
+	@b = @c.bucket('trans_projects')
+	@o = @b.get(params[:key])
+	@o.data[:words] = a.size
+	if @o.store
+		redirect to('/')
+	else
+		redirect to('/error')
+	end
+end

@@ -15,24 +15,33 @@ background: #65C4F7;
 <% end %>
 ">
 <a style="display:inline-block;" href="<%= r.data['url']%>" target="_blank"><span style="width: 120px;display:inline-block;font-family: sans-serif; margin-right: 10px;">Great Hand-<%= r.data['number'] %></span></a><span style="cursor: pointer;margin-left: 3em;display:inline-block;width: 7em;" class="status"><%=  r.data['status']? r.data['status'] :  'None' %></span>
-	<form style="display:inline;" action="/update/<%= r.key%>" method="post">
+	<span class="words" style="display:inline-block; margin-right: 20px;cursor: pointer;width: 50px;"><%= r.data['words']? r.data['words'].round(-2)/100: 1 %></span>
+		<form class="status-form" style="display:inline;" action="/update/<%= r.key%>" method="post">
 		<select name="name[status]">
 			<option>EN-?</option>
 			<option>EN-OK</option>
 			<option>CN-?</option>
 			<option>Finished!</option>
 		</select>
-		<input type="submit" />	
+		<input type="submit" class="words"/>	
 	</form>
+	<form class="words-form" style="display:inline;" action="/count/<%= r.key %>" method="post">
+		<textarea name="name[transcript]" style="height:18px;" ></textarea>
+		<input type="submit" />
+	</form>
+
 </li> 
 <% end %>
 </ul>
 <script>
-$(function(){
+ $(function(){
 		$('form').hide();
 		$('.status').click(function(){
-				$(this).next('form').toggle()
-			})
-		})
+				$(this).parent().find('.status-form').toggle()
+			});
+		$('.words').click(function(){
+			$(this).parent().find('.words-form').toggle()
+		});
+	}); 
 </script>
 
