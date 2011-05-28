@@ -1,4 +1,4 @@
-<h1>Great Hand for Life Time 汉化进度</h1>
+<h1 style="text-align: center;">Great Hand for Life Time 汉化进度</h1>
 <ul style="list-style: none; padding:0;margin:0;">
 
 <% @a.each do |r|%>
@@ -29,13 +29,17 @@ background: #65C4F7;
 		<textarea name="name[transcript]" style="height:18px;" ></textarea>
 		<input type="submit" />
 	</form>
-
+	<form class="delete-form" style="display:inline-block; " action="/delete/<%= r.key %>" method="post">
+	<input name="_method" type="hidden" value="delete"/> 
+	<button >delete</button>
+	</form>
 </li> 
 <% end %>
 </ul>
 <script>
  $(function(){
-		$('form').hide();
+		$('.status-form').hide();
+		$('.words-form').hide();
 		$('.status').click(function(){
 				$(this).parent().find('.status-form').toggle()
 			});

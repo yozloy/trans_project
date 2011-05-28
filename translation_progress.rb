@@ -69,3 +69,11 @@ post '/count/:key' do
 		redirect to('/error')
 	end
 end
+
+delete '/delete/:key' do
+	c = Riak::Client.new
+	r = c['trans_projects'][params[:key]]
+	if r.delete
+		redirect to('/')
+	end
+end
