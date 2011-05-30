@@ -1,6 +1,6 @@
 <h1 style="text-align: center;">Great Hand for Life Time 汉化进度</h1>
 <ul style="list-style: none; padding:0;margin:0;">
-
+<% @count_all = 0%>
 <% @a.each do |r|%>
 
 <li style="padding: 5px 10px;
@@ -15,7 +15,7 @@ background: #65C4F7;
 <% end %>
 ">
 <a style="display:inline-block;" href="<%= r.data['url']%>" target="_blank"><span style="width: 120px;display:inline-block;font-family: sans-serif; margin-right: 10px;">Great Hand-<%= r.data['number'] %></span></a><span style="cursor: pointer;margin-left: 3em;display:inline-block;width: 7em;" class="status"><%=  r.data['status']? r.data['status'] :  'None' %></span>
-	<span class="words" style="display:inline-block; margin-right: 20px;cursor: pointer;width: 50px;"><%= r.data['words']? r.data['words'].round(-2)/100: 1 %></span>
+	<span class="words" style="display:inline-block; margin-right: 20px;cursor: pointer;width: 50px;"><%= @count = r.data['words']? r.data['words'].round(-2)/100: 1 %></span>
 		<form class="status-form" style="display:inline;" action="/update/<%= r.key%>" method="post">
 		<select name="name[status]">
 			<option>EN-?</option>
@@ -34,8 +34,10 @@ background: #65C4F7;
 	<button >delete</button>
 	</form>
 </li> 
+<% @count_all =@count_all + @count %>
 <% end %>
 </ul>
+<%=@count_all%>
 <script>
  $(function(){
 		$('.status-form').hide();
